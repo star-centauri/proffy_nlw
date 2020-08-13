@@ -3,34 +3,54 @@ import React from 'react';
 import './styles.css';
 
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import api from '../../services/api';
 
-function TeacherItem() {
+export interface Teacher {
+    id: number;
+    avatar: string;
+    bio: string;
+    cost: number;
+    name: string;
+    subject: string;
+    whatsapp: string;
+}
+
+interface TeacherItemProps {
+    teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+    function createNewConnection() {
+        api.post('connections', {
+            user_id: teacher.id,
+        })
+    }
+    
     return (
         <article className="teacher-item">
             <header>
-                <img src="https://media-exp1.licdn.com/dms/image/C4D03AQGcJ3mvPZFyeg/profile-displayphoto-shrink_400_400/0?e=1602115200&v=beta&t=XcSeI_3YYGWBRjS6W8intoItACluVy-pD69_oZB7Las" alt="foto do proffy, Bruna de Lima" />
+                <img src={teacher.avatar} alt={teacher.name} />
                 <div>
-                    <strong>Bruna de Lima</strong>
-                    <span>Informática</span>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
                 </div>
             </header>
 
-            <p>
-                Apaixonada por novas tecnologias relacionada a Javascript.
-                <br/> <br/>
-                Nova tecnologia no mercado? Javascript? Ciênica de Dados? Opá é comigo mesmo! 
-                Uma estusiasta por criação de sistemas com javascript e C#, além de ter como um hobby (que futuramente deixará de ser hobby) estudo em machile learning, IA e banco de dados! 
-            </p>
+            <p>{teacher.bio}</p>
 
             <footer>
                 <p>
                     Preço/hora
-                    <strong>R$ 80,00</strong>
+                    <strong>R$ {teacher.cost}</strong>
                 </p>
-                <button type="button">
+                <a 
+                    href={`https://wa.me/${teacher.whatsapp}`} 
+                    onClick={createNewConnection}
+                    target="_blank" 
+                >
                     <img src={whatsappIcon} alt="Entrar em contato por whatsapp" />
-                    Entrat em contato
-                </button>
+                    Entrar em contato
+                </a>
             </footer>
         </article>
     )
