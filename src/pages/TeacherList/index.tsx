@@ -82,6 +82,15 @@ function TeacherList() {
                 {teachers.map((teacher: Teacher) => {
                     return <TeacherItem key={teacher.id} teacher={teacher} />
                 })}
+                <TeacherItem key={6} teacher={{
+                    "id": 6,
+                    "subject": "Informática",
+                    "cost": 50,
+                    "name": "Bruna de Lima",
+                    "avatar": "https://media-exp1.licdn.com/dms/image/C4D03AQGcJ3mvPZFyeg/profile-displayphoto-shrink_400_400/0?e=1602720000&v=beta&t=26lVWJ3k5BREOsi1QS3hg4zPcXwYDO630ukL31-rmbk",
+                    "whatsapp": "21975638466",
+                    "bio": "Apaixonada por novas tecnologias relacionada a Javascript. Nova tecnologia no mercado? Javascript? Ciênica de Dados? Opá é comigo mesmo! Uma estusiasta por criação de sistemas com javascript e C#, além de ter como um hobby (que futuramente deixará de ser hobby) estudo em machile learning, IA e banco de dados!"
+                }} />
             </main>        
         </div>
     )
